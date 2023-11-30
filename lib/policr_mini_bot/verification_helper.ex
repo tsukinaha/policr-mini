@@ -477,7 +477,7 @@ defmodule PolicrMiniBot.VerificationHelper do
           {:ok, Verification.t()} | {:error, any}
   def send_verification(v, scheme) do
     mode = scheme.verification_mode || default!(:vmode)
-    data = Captcha.make(mode, v.chat_id, scheme)
+    data ||= Captcha.make(mode, v.chat_id, scheme)
 
     ttitle =
       commands_text("来自『%{chat_title}』的验证，请确认问题并选择您认为正确的答案。",
